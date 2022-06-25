@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="100%" class="scroll" border="0" id="testTable" cellspacing="0" cellpadding="0" style="color:rgb(0,0,0);">
+                      <thead>
+                      </thead>
+                      <tbody class="zebrac" style="color: black;">
+                        <tr>
+                          <td colspan="7" align="center" style="font-weight:bold;" >
+                            <br>
+                            <h3>Bukti Memorial (BM)</h3>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="7" align="left" style="font-weight:bold;" ><table width="50%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                              <tr>
+                                <td width="16%">No Bukti </td>
+                                <td width="3%">:</td>
+                                <td width="81%"><?php echo $idx; ?></td>
+                              </tr>
+                              <tr>
+                                <td>Tanggal </td>
+                                <td>:</td>
+                                <td><?php
+                            include 'includefile/konversitanggal.php';
+                            ?>
+
+                             <?php echo TanggalIndo($tgl_trans_x); ?></td>
+                              </tr>
+                              <tr>
+                                <td>Keterangan </td>
+                                <td>:</td>
+                                <td><?php echo $keterangan_x; ?></td>
+                              </tr>
+                            </tbody>
+                          </table></td>
+                        </tr>
+                        <tr>
+                          <td colspan="7" align="left" style="font-weight:bold;" >&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td style="border: thin solid black;
+                            font-weight:bold" width='11%' align="center">
+                            No
+                          </td>
+                          <td colspan="2" align="center" style="font-weight:bold; border: thin solid black;">
+                            No Akun
+                          </td>
+                          <td colspan="2" align="center"
+                            style="font-weight:bold; border: thin solid black;">
+                            Nama akun
+                          </td>
+                          <td align="center" width='12%'  style="font-weight:bold; border: thin solid black;">
+                            Debet
+                          </td>
+                          <td align="center" width='16%'  style="font-weight:bold; text-align:center; border: thin solid black;" >
+                            Kredit
+                          </td>
+                        </tr>
+
+                        <?php
+                        $totaldetailbkk_d = 0;
+                        $totaldetailbkk_k = 0;
+                        $no = 0;
+                        foreach ($jpen_edit as $row_rsDatailBkk){
+                          $nilai_d = $row_rsDatailBkk->jml_D_x;
+                          $totaldetailbkk_d = $totaldetailbkk_d + $nilai_d;
+                          $nilai_k = $row_rsDatailBkk->jml_K_x;
+                          $totaldetailbkk_k = $totaldetailbkk_k + $nilai_k;
+                          $no = $no + 1;
+                          ?>
+
+                          <tr>
+                            <td style="border: thin solid black;" width='11%' align="left">
+                              <?php echo $no; ?>
+                            </td>
+                            <td colspan="2" align="center" style="border: thin solid black;">
+                              <?php echo $row_rsDatailBkk->kd_akun_x; ?>
+                            </td>
+                            <td colspan="2" align="left"
+                              style="border: thin solid black;">
+                              <?php echo ucwords(strtolower($row_rsDatailBkk->nama_x)); ?>
+                            </td>
+                            <td align="right" width='12%'  style="border: thin solid black;">
+                              <?php echo number_format($row_rsDatailBkk->jml_D_x, 2); ?>
+                            </td>
+                            <td align="right" width='16%'  style="border: thin solid black;" >
+                              <?php echo number_format($row_rsDatailBkk->jml_K_x, 2); ?>
+                            </td>
+                          </tr>
+
+                          <?php
+                        }
+                        ?>
+
+
+                        <tr style="border-left:none; border-right:none;">
+                          <td style="border-left:none; border-right:none; border-bottom:none;" width='11%' align="center">
+                          </td>
+                          <td colspan="2" align="center" style="border-left:none; border-right:none; border-bottom:none;">
+                          </td>
+                          <td colspan="2" align="right"
+                            style="border-left:none; border-right:none; border-bottom:none;">
+                            Total :
+                          </td>
+                          <td align="right" width='12%' style="font-weight:bold; text-align:right; border-bottom: thin solid black;" >
+                            <?php echo number_format($totaldetailbkk_d, 2); ?>
+                          </td>
+                          <td align="right" width='16%' style="font-weight:bold; text-align:right; border-bottom: thin solid black;" >
+                            <?php echo number_format($totaldetailbkk_k, 2); ?>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="7" align="left">
+                            <?php
+                            include 'includefile/terbilang.php';
+                            ?>
+
+                            Terbilang : &nbsp; <?php echo ucwords(terbilang($totaldetailbkk_d))." Rupiah"; ?>
+                            <br><br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" align="center">
+                            <b>Diketahui Oleh :</b>
+                          </td>
+                          <td width="26%"></td>
+                          <td colspan="3" align="center">
+                            <b>Dibukukan Oleh :</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" align="center">
+                            <br><br><br>
+                          </td>
+                          <td width="26%"></td>
+                          <td colspan="3" align="center">
+
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" align="center">
+                            <?php echo "( nama )"; ?>
+                          </td>
+                          <td width="26%"></td>
+                          <td colspan="3" align="center">
+                            <?php echo "( nama )"; ?>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" align="center">
+                            Kepala Accounting
+                          </td>
+                          <td width="26%"></td>
+                          <td colspan="3" align="center">
+                            Penanggung Jawab
+                          </td>
+                        </tr>
+                        </tbody>
+                        <tfoot style="margin-right:5%; font-weight:bold; background: #337ab7;
+                          color:white;">
+                        </tfoot>
+                      </table>
+</body>
+</html>
